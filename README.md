@@ -18,3 +18,8 @@ Python 3.x
 Linux or macOS (for network interface management)
 
 Administrative (root) privileges
+
+Important Notes
+Legal Disclaimer: MAC address spoofing may violate network policies and could be illegal in some jurisdictions. Use this tool only in environments where you have permission to test it.
+Permissions: The script must be run with root privileges (sudo) to make changes to network settings.
+
