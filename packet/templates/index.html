@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Packet Analyzer</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h1>Network Packet Analyzer</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Source IP</th>
+                <th>Destination IP</th>
+                <th>Protocol</th>
+                <th>Summary</th>
+            </tr>
+        </thead>
+        <tbody id="packet-table">
+            <!-- Packet data will be inserted here by JavaScript -->
+        </tbody>
+    </table>
+    <script>
+        async function fetchPackets() {
+            const response = await fetch('/api/packets');
+            const packets = await response.json();
+            const packetTable = document.getElementById('packet-table');
+            packetTable.innerHTML = '';
+
+            packets.forEach(packet => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${packet.src}</td>
+                    <td>${packet.dst}</td>
+                    <td>${packet.protocol}</td>
+                    <td>${packet.summary}</td>
+                `;
+                packetTable.appendChild(row);
+            });
+        }
+
+        // Fetch packets every 2 seconds
+        setInterval(fetchPackets, 2000);
+    </script>
+</body>
+</html>
